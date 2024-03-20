@@ -1,16 +1,10 @@
 import Webcam from "react-webcam";
-import "./CustomWebcam.css"
-
+import './CustomWebcam.css'
 import { useCallback, useRef, useState } from "react";
+
 const CustomWebcam = () => {
   const webcamRef = useRef(null);
-  const [imgSrc, setImgSrc] = useState(null);
   const [isFrontFacing, setIsFrontFacing] = useState(true);
-
-  const retake = () => {
-    setImgSrc(null);
-  };
-
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -21,13 +15,12 @@ const CustomWebcam = () => {
     const link = document.createElement("a");
     link.href = imageSrc;
     link.setAttribute("download", `../imagefolder/${imageName}`);
-    
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }, [webcamRef]);
 
-    const toggleFacingMode = () => {
+  const toggleFacingMode = () => {
     setIsFrontFacing((prev) => !prev);
   };
 
@@ -43,23 +36,22 @@ const CustomWebcam = () => {
         facingMode: { exact: "environment" },
       };
 
-    return (
-      <div className="container">
-        {imgSrc ? (
-          <img src={imgSrc} alt="webcam" />
-        ) : (
-          <Webcam height={videoConstraints.height} width={videoConstraints.height} ref={webcamRef} />
-        )}
-        <div className="btn-container">
-          {imgSrc ? (
-            <button onClick={retake}>Retake photo</button>
-          ) : (
-            <button onClick={capture}>Capture photo</button>
-          )}
-          <button onClick={toggleFacingMode}>Reverse Cam</button>
-        </div>
+  return (
+    <div className="container">
+      <Webcam
+        height={videoConstraints.height}
+        width={videoConstraints.height}
+        ref={webcamRef}
+        videoConstraints={videoConstraints}
+      />
+      <div className="btn-container">
+        <button onClick={capture}>Capture photo</button>
+        <button onClick={toggleFacingMode}>Reverse Cam</button>
       </div>
-    );
-  }
+    </div>
+  );
+};
 
 export default CustomWebcam;
+
+
