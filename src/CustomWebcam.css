@@ -1,0 +1,39 @@
+.container{
+    position:relative;
+    height: 720px;
+}
+
+.container video,
+.container img {
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 40px;
+    align-self: center;
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+.btn-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px 50px;
+
+}
+
+.btn-container button {
+    background-color: #4caf50;
+    /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-container button:hover {
+    background-color: #45a049;
+    /* Darker green */
+}
